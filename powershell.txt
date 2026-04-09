@@ -1,0 +1,14 @@
+cada novo projeto:
+pip install fastapi uvicorn requests beautifulsoup4
+
+
+cd ~/dev/price-monitor-api
+.\venv\Scripts\Activate
+code .
+python scraper.py
+
+uvicorn main:app --reload
+
+testar depois
+
+pndh ooop frkf mabt
