@@ -46,4 +46,7 @@ def adicionar(url: str, email: str):
 def produtos():
     return listar_produtos()
 
+<<<<<<< HEAD
 #edicao de testes
+=======
+>>>>>>> a4ab5bf514157f8d8ef6770737c607a2d24b954e

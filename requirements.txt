@@ -1,4 +1,8 @@
 fastapi
 uvicorn
 playwright
+<<<<<<< HEAD
 psycopg2-binary
+=======
+psycopg2-binary
+>>>>>>> a4ab5bf514157f8d8ef6770737c607a2d24b954e
