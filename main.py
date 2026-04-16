@@ -46,3 +46,4 @@ def adicionar(url: str, email: str):
 def produtos():
     return listar_produtos()
 
+#edicao de testes
