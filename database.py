@@ -1,7 +1,10 @@
-import sqlite3
+import psycopg2
+import os
+
+DATABASE_URL=postgresql://monitor_api_postgresql_user:fJ0wZvu9qQbNcnSorFIiBz3DB2btvk4c@dpg-d7gitd6gvqtc73flj0k0-a:5432/db
 
 def conectar():
-    return sqlite3.connect("precos.db")
+    return psycopg2.connect(os.getenv("DATABASE_URL"))
 
 
 # -------------------------
@@ -13,7 +16,7 @@ def criar_tabela_produtos():
 
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS produtos (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            id SERIAL PRIMARY KEY,
             url TEXT UNIQUE,
             email TEXT
         )
@@ -21,7 +24,6 @@ def criar_tabela_produtos():
 
     conn.commit()
     conn.close()
-
 
 def adicionar_produto(url, email):
     conn = conectar()
@@ -60,9 +62,9 @@ def criar_tabela_precos():
 
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS precos (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            id SERIAL PRIMARY KEY,
             url TEXT,
-            preco REAL,
+            preco FLOAT,
             data TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )
     """)
@@ -70,13 +72,12 @@ def criar_tabela_precos():
     conn.commit()
     conn.close()
 
-
 def salvar_preco(url, preco):
     conn = conectar()
     cursor = conn.cursor()
 
     cursor.execute(
-        "INSERT INTO precos (url, preco) VALUES (?, ?)",
+        "INSERT INTO precos (url, preco) VALUES (%s, %s)",
         (url, float(preco))
     )
 
@@ -89,7 +90,7 @@ def buscar_historico(url):
     cursor = conn.cursor()
 
     cursor.execute(
-        "SELECT preco, data FROM precos WHERE url = ? ORDER BY data DESC",
+        "SELECT preco, data FROM precos WHERE url = %s ORDER BY data DESC",
         (url,)
     )
 
@@ -104,7 +105,7 @@ def ultimo_preco(url):
     cursor = conn.cursor()
 
     cursor.execute(
-        "SELECT preco FROM precos WHERE url = ? ORDER BY data DESC LIMIT 1",
+        "SELECT preco FROM precos WHERE url = %s ORDER BY data DESC LIMIT 1",
         (url,)
     )
 

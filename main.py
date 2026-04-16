@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from scraper import pegar_preco
-from database import criar_tabela_produtos, salvar_preco
+from database import criar_tabela_produtos, criar_tabela_precos
 from database import buscar_historico
 from database import salvar_preco, ultimo_preco, adicionar_produto 
 
@@ -45,8 +45,3 @@ def adicionar(url: str, email: str):
 @app.get("/produtos")
 def produtos():
     return listar_produtos()
-
-<<<<<<< HEAD
-#edicao de testes
-=======
->>>>>>> a4ab5bf514157f8d8ef6770737c607a2d24b954e
