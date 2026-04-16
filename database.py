@@ -1,14 +1,13 @@
 import psycopg2
 import os
 
-DATABASE_URL=postgresql://monitor_api_postgresql_user:fJ0wZvu9qQbNcnSorFIiBz3DB2btvk4c@dpg-d7gitd6gvqtc73flj0k0-a:5432/db
 
 def conectar():
     return psycopg2.connect(os.getenv("DATABASE_URL"))
 
 
 # -------------------------
-# TABELA PRODUTOS
+# PRODUTOS
 # -------------------------
 def criar_tabela_produtos():
     conn = conectar()
@@ -25,13 +24,14 @@ def criar_tabela_produtos():
     conn.commit()
     conn.close()
 
+
 def adicionar_produto(url, email):
     conn = conectar()
     cursor = conn.cursor()
 
     try:
         cursor.execute(
-            "INSERT INTO produtos (url, email) VALUES (?, ?)",
+            "INSERT INTO produtos (url, email) VALUES (%s, %s)",
             (url, email)
         )
         conn.commit()
@@ -54,7 +54,7 @@ def listar_produtos():
 
 
 # -------------------------
-# TABELA PREÇOS
+# PREÇOS
 # -------------------------
 def criar_tabela_precos():
     conn = conectar()
@@ -71,6 +71,7 @@ def criar_tabela_precos():
 
     conn.commit()
     conn.close()
+
 
 def salvar_preco(url, preco):
     conn = conectar()

@@ -41,6 +41,3 @@ def monitorar():
         print("Aguardando 60 segundos...\n")
         time.sleep(60)
 
-
-if __name__ == "__main__":
-    monitorar()

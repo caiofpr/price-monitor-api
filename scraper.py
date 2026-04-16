@@ -58,8 +58,3 @@ def pegar_preco(url):
 
     except Exception as e:
         return {"erro": str(e)}
-
-
-if __name__ == "__main__":
-    url = "https://www.mercadolivre.com.br/teclado-gamer-phantom-rainbow-mecanico-switch-brown-cor-de-teclado-preto-idioma-portugus-brasil/p/MLB46094968"
-    print(pegar_preco(url))
