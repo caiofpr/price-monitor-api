@@ -4,17 +4,15 @@ def pegar_preco(url):
     try:
         with sync_playwright() as p:
             browser = p.chromium.launch(
-<<<<<<< HEAD
+
                 headless=True,
                 args=[
                     "--disable-blink-features=AutomationControlled",
                     "--no-sandbox",
                     "--disable-setuid-sandbox"
                 ]
-=======
                 headless=False,
                 args=["--disable-blink-features=AutomationControlled"]
->>>>>>> a4ab5bf514157f8d8ef6770737c607a2d24b954e
             )
 
             context = browser.new_context(
@@ -25,14 +23,12 @@ def pegar_preco(url):
             page.goto(url, timeout=60000)
             page.wait_for_timeout(5000)
 
-<<<<<<< HEAD
             def extrair_valor(container):
                 inteiro = container.locator(
                     ".andes-money-amount__fraction"
                 ).first.inner_text().strip().replace(".", "")
 
                 cents_locator = container.locator(
-=======
             # -------------------------------------------------------
             # O Mercado Livre separa o preço em dois elementos HTML:
             #   .andes-money-amount__fraction → parte inteira  (ex: "199" ou "1.299")
@@ -61,7 +57,7 @@ def pegar_preco(url):
 
                 # centavos: elemento separado, sempre 2 dígitos (ex: "90")
                 cents_locator = container_locator.locator(
->>>>>>> a4ab5bf514157f8d8ef6770737c607a2d24b954e
+
                     ".andes-money-amount__cents"
                 ).first
 
@@ -73,7 +69,6 @@ def pegar_preco(url):
 
             preco_final = None
 
-<<<<<<< HEAD
             promo = page.locator(
                 ".ui-pdp-price__second-line .andes-money-amount"
             ).first
@@ -87,7 +82,7 @@ def pegar_preco(url):
             if preco_final is None:
                 normal = page.locator("div.ui-pdp-price").first
                 preco_final = extrair_valor(normal)
-=======
+
             # 1) Tenta preço PROMOCIONAL (segunda linha — preço com desconto)
             promo_container = page.locator(
                 ".ui-pdp-price__second-line .andes-money-amount--cents-superscript"
@@ -104,7 +99,6 @@ def pegar_preco(url):
             if preco_final is None:
                 container = page.locator("div.ui-pdp-price").first
                 preco_final = extrair_valor(container)
->>>>>>> a4ab5bf514157f8d8ef6770737c607a2d24b954e
 
             browser.close()
             return {"preco": preco_final}
@@ -114,14 +108,12 @@ def pegar_preco(url):
 
 
 if __name__ == "__main__":
-<<<<<<< HEAD
     url = "https://www.mercadolivre.com.br/teclado-gamer-phantom-rainbow-mecanico-switch-brown-cor-de-teclado-preto-idioma-portugus-brasil/p/MLB46094968"
     print(pegar_preco(url))
-=======
+
     url = (
         "https://www.mercadolivre.com.br/teclado-gamer-phantom-rainbow-mecanico"
         "-switch-brown-cor-de-teclado-preto-idioma-portugus-brasil/p/MLB46094968"
     )
     resultado = pegar_preco(url)
     print(resultado)
->>>>>>> a4ab5bf514157f8d8ef6770737c607a2d24b954e
