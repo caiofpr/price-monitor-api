@@ -1,3 +1,4 @@
 fastapi
 uvicorn
 playwright
+psycopg2-binary
