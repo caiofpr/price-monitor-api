@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from scraper import pegar_preco
+from email_alert import enviar_email
 from database import (
     criar_tabela_produtos,
     criar_tabela_precos,
