@@ -1,7 +1,7 @@
 import resend
 import os
 
-resend.api_key = os.getenv("RESEND_API_KEY") or "re_ALttqUea_CqzvMvJFccULtUFDkJRuCxJT"
+resend.api_key = os.getenv("RESEND_API_KEY") or raise Exception("RESEND_API_KEY não configurada")
 
 def enviar_email(destino, assunto, mensagem):
     try:
