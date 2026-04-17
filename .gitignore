@@ -16,6 +16,3 @@ AppData/
 
 # VSCode
 .vscode/
-
-# Playwright
-playwright/.local-browsers/
