@@ -25,3 +25,9 @@ def monitorar():
 
         print("Aguardando 60 segundos...")
         time.sleep(60)
+
+if ultimo is None or preco_atual != ultimo:
+    salvar_preco(url, preco_atual)
+
+    if ultimo and preco_atual < ultimo:
+        print(f"Preço caiu! {url} -> {preco_atual}")
