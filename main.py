@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from scraper import pegar_preco
-from email_alert import enviar_email
+from email_alert import enviar_email, email_boas_vindas
 from database import (
     criar_tabela_produtos,
     criar_tabela_precos,
@@ -46,6 +46,10 @@ def historico(url: str):
 @app.post("/produto")
 def adicionar(url: str, email: str):
     adicionar_produto(url, email)
+    return {"msg": "Produto adicionado"}    
+        # 🔥 envia email ao cadastrar
+    email_boas_vindas(email, url)
+
     return {"msg": "Produto adicionado"}
 
 @app.get("/produtos")

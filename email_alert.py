@@ -20,3 +20,18 @@ def enviar_email(destino, assunto, mensagem):
 
     except Exception as e:
         print("Erro ao enviar email:", e)
+
+def email_boas_vindas(destino, url):
+    assunto = "Monitoramento ativado!"
+    mensagem = f"""
+Seu email foi cadastrado com sucesso ✅
+
+Agora você receberá alertas quando o preço do produto mudar.
+
+Produto monitorado:
+{url}
+
+Se você não solicitou isso, ignore este email.
+"""
+
+    enviar_email(destino, assunto, mensagem)
