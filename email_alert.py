@@ -23,7 +23,7 @@ def enviar_email(destino, assunto, mensagem):
 
 def email_boas_vindas(destino, url):
     assunto = "Monitoramento ativado!"
-    mensagem = f"""
+    mensagem = f"Teste {url}"
 Seu email foi cadastrado com sucesso ✅
 
 Agora você receberá alertas quando o preço do produto mudar.
