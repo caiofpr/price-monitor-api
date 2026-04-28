@@ -1,8 +1,9 @@
 import smtplib
 from email.mime.text import MIMEText
+import os
 
-EMAIL_REMETENTE = "monitorapiemail@gmail.com"
-SENHA_APP = "pndh ooop frkf mabt"
+EMAIL_REMETENTE = os.getenv("EMAIL_REMETENTE")
+SENHA_APP = os.getenv("EMAIL_SENHA")  # senha de app do Gmail
 
 def enviar_email(destino, assunto, mensagem):
     try:
@@ -16,14 +17,16 @@ def enviar_email(destino, assunto, mensagem):
             server.login(EMAIL_REMETENTE, SENHA_APP)
             server.send_message(msg)
 
-        print(f"Email enviado para {destino}")
+        print(f"[OK] Email enviado para {destino}")
 
     except Exception as e:
-        print("Erro ao enviar email:", e)
+        print("[ERRO EMAIL]:", e)
+
 
 def email_boas_vindas(destino, url):
     assunto = "Monitoramento ativado!"
-    mensagem = f"Teste {url}"
+
+    mensagem = f"""
 Seu email foi cadastrado com sucesso ✅
 
 Agora você receberá alertas quando o preço do produto mudar.
